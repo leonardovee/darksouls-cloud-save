@@ -1,0 +1,9 @@
+[package]
+name = "darksouls-cloud-save"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aws-config = "0.48.0"
+aws-sdk-s3 = "0.18.0"
+tokio = { version = "1", features = ["full"] }
