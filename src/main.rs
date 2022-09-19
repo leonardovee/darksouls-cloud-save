@@ -102,7 +102,7 @@ async fn upload_object(client: &Client) -> Result<(), Error> {
     Ok(())
 }
 
-pub async fn download_object(client: &Client) -> Result<(), Error> {
+async fn download_object(client: &Client) -> Result<(), Error> {
     let resp = client
         .get_object()
         .bucket(BUCKET_NAME)
