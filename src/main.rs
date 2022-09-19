@@ -5,12 +5,15 @@ use std::path::Path;
 use tokio::fs::File;
 use tokio::io;
 
+// TODO: get real save path.
 const SAVE_PATH: &str = "test.txt";
 const BUCKET_NAME: &str = "darksouls-cloud-save";
+// TODO: document this on readme.md.
 const BUCKET_REGION: &str = "sa-east-1";
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
+    // TODO: document this on readme.md.
     let config = aws_config::load_from_env().await;
     let client = Client::new(&config);
     create_bucket_if_not_exists(&client).await;
@@ -39,7 +42,7 @@ async fn main() -> Result<(), Error> {
                 .await
                 .expect("Error while downloading the save file!");
         }
-        _ => panic!("This is not an available option"),
+        _ => panic!("This is not an available option, aborting."),
     }
 
     Ok(())
@@ -89,6 +92,7 @@ async fn upload_object(client: &Client) -> Result<(), Error> {
     let _ = &client
         .put_object()
         .bucket(BUCKET_NAME)
+        // TODO: get file name from path.
         .key(BUCKET_NAME)
         .body(body)
         .send()
@@ -102,6 +106,7 @@ pub async fn download_object(client: &Client) -> Result<(), Error> {
     let resp = client
         .get_object()
         .bucket(BUCKET_NAME)
+        // TODO: get file name from path.
         .key(BUCKET_NAME)
         .send()
         .await
